@@ -31,16 +31,19 @@ public class GeetingControler extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String RESULT_PAGE = "result.jsp";
-    protected void processRequest(HttpServletRequest request , HttpServletResponse response)
-            throws ServletException, IOException {
+    private final String RESULT_PAGE = "result.jsp";
+    private final String parameterName = "name";
+    private final String attributeGreeting = "greeting";
+    
+    
+    protected void processRequest(HttpServletRequest request , HttpServletResponse response)throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
         WelcomeService service = new WelcomeService();
         
-        String greeting = service.GreetingBasedOnTime(request.getParameter("name"));
+        String greeting = service.GreetingBasedOnTime(request.getParameter(parameterName));
         
-        request.setAttribute("greeting", greeting);
+        request.setAttribute(attributeGreeting, greeting);
         
         RequestDispatcher view = request.getRequestDispatcher(RESULT_PAGE);
         view.forward(request, response);

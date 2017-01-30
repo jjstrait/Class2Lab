@@ -14,7 +14,15 @@ import java.util.Calendar;
  */
 public class WelcomeService {
     private Calendar date;
-    
+    /**
+     * Method function is to take a date and determine the proper saying for the time of day.
+     * -morning before 12pm
+     * -evening between 12-19(7:00pm)
+     * -eveing after 19(7:00pm)
+     * @param date
+     * @return String = morning,afternoon,evening
+     * @throws IllegalArgumentException 
+     */
     public String getPartOfTheDay(Calendar date) throws IllegalArgumentException{
         final int timeTillMorning = 12;
         final int timeTillAfternoon = 19;
@@ -43,8 +51,16 @@ public class WelcomeService {
         
         return partOfDay;
     }
-    
-    public String GreetingBasedOnTime(String name){
+    /**
+     * method function is to return a greeting based on the time from the computer
+     * @param name
+     * @return String = Good [time greeting] [name], Welcome!
+     * @throws IllegalArgumentException 
+     */
+    public String GreetingBasedOnTime(String name)throws IllegalArgumentException{
+        if(name == null){
+         throw new IllegalArgumentException("Date is null");
+        }
     return "Good "+getPartOfTheDay(Calendar.getInstance())+" "+name+", Welcome!";
     }
     
