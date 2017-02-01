@@ -12,6 +12,7 @@
         <title>Result Page</title>
     </head>
     <body>
-        <h1><%out.print(request.getAttribute("greeting"));%></h1>
+        <h1>${greeting}</h1>
+        
     </body>
 </html>

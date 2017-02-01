@@ -19,8 +19,8 @@
                 <tr>
                <% for(int col=0;col<3;col++){%>
                <td>row <%out.println(i);%> col<%out.println(col); %></td>
-                <%}%>
-            <%}%>
+                <%}
+            }%>
             </table>
     </body>
 </html>

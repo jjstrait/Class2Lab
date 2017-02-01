@@ -38,15 +38,23 @@ public class GeetingControler extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request , HttpServletResponse response)throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        try{
         WelcomeService service = new WelcomeService();
         
-        String greeting = service.GreetingBasedOnTime(request.getParameter(parameterName));
+        String greeting = service.greetingBasedOnTime(request.getParameter(parameterName));
         
         request.setAttribute(attributeGreeting, greeting);
         
+        
+        }catch(Exception e)
+        {
+        
+            request.setAttribute(attributeGreeting, e.getMessage());
+        }
+        
         RequestDispatcher view = request.getRequestDispatcher(RESULT_PAGE);
         view.forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

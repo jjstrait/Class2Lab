@@ -15,17 +15,18 @@ import java.util.Calendar;
 public class WelcomeService {
     private Calendar date;
     /**
-     * Method function is to take a date and determine the proper saying for the time of day.
+     * Method function is to takes current date and determine the proper saying for the time of day.
      * -morning before 12pm
      * -evening between 12-19(7:00pm)
-     * -eveing after 19(7:00pm)
-     * @param date
+     * -evening after 19(7:00pm)
      * @return String = morning,afternoon,evening
      * @throws IllegalArgumentException 
      */
-    public String getPartOfTheDay(Calendar date) throws IllegalArgumentException{
+    public String getPartOfTheDay() throws IllegalArgumentException{
         final int timeTillMorning = 12;
         final int timeTillAfternoon = 19;
+        
+        Calendar currentDate = Calendar.getInstance();
         
         Calendar morning = Calendar.getInstance();
         morning.set(Calendar.HOUR_OF_DAY, timeTillMorning);
@@ -35,14 +36,14 @@ public class WelcomeService {
       
         String partOfDay;
         
-        if(date == null){
-            throw new IllegalArgumentException("Date is null");
+        if(currentDate == null){
+            throw new IllegalArgumentException("No Date was entered");
         }
         
-        if(date.getTime().before(morning.getTime())){
+        if(currentDate.getTime().before(morning.getTime())){
         partOfDay = "Morning";
         }
-        else if(date.getTime().after(morning.getTime())&&date.getTime().before(afternoon.getTime())){
+        else if(currentDate.getTime().after(morning.getTime())&&currentDate.getTime().before(afternoon.getTime())){
         partOfDay = "Afternoon";
         }
         else {
@@ -57,20 +58,20 @@ public class WelcomeService {
      * @return String = Good [time greeting] [name], Welcome!
      * @throws IllegalArgumentException 
      */
-    public String GreetingBasedOnTime(String name)throws IllegalArgumentException{
-        if(name == null){
-         throw new IllegalArgumentException("Date is null");
+    public String greetingBasedOnTime(String name)throws IllegalArgumentException{
+        if(name == null|| name.trim().length() == 0){
+         throw new IllegalArgumentException("No name was entered");
         }
-    return "Good "+getPartOfTheDay(Calendar.getInstance())+" "+name+", Welcome!";
+    return "Good "+getPartOfTheDay()+" "+name+", Welcome!";
     }
     
     
     public static void main(String[] args) {
         WelcomeService service = new WelcomeService();
         
-        Calendar cal = Calendar.getInstance();
-        System.out.println(service.getPartOfTheDay(cal));
-        System.out.println(service.GreetingBasedOnTime("Joshua"));
+       
+        System.out.println(service.getPartOfTheDay());
+        System.out.println(service.greetingBasedOnTime("Joshua"));
         
     }
 }
